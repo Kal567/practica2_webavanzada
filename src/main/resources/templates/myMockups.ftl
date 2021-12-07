@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CRUD - List</title>
+    <title>MyMocky</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -12,16 +12,37 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 
 
-<nav class="navbar navbar-dark bg-dark">
-    <a href="/#" class="navbar-brand" style="font-family: 'Arial'">
-        Mockapi
-    </a>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand" href="/">MyMocky</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Crear Mock<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mymocks">Mis Mocks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/allmockys">Todos los Mocks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/allusers">Usuarios</a>
+            </li>
+            <form action = "/logout" method="post">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-dark">Cerrar Sesión</button>
+                </div>
+            </form>
+        </ul>
+    </div>
 </nav>
 <br>
 <br>
 <div>
-
+    <h1>     Mis Mockys</h1>
 </div>
 <div class="container-fluid">
     <div class="shadow-sm p3 mb-5 bg-white rounded">
@@ -30,70 +51,26 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Matricula</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">         </th>
+                    <th scope="col">   </th>
                 </tr>
                 </thead>
                 <tbody>
-                <#if estudiante?size != 0>
-                    <#list estudiante as estu>
+                <#if mocks?size != 0>
+                    <#list mocks as mck>
                         <tr>
-                            <td>${estu.id}</td>
-                            <td>${estu.matricula}</td>
-                            <td>${estu.nombre}</td>
-                            <td>${estu.apellido}</td>
-                            <td>${estu.telefono}</td>
+                            <td>${mck.idMock}</td>
+                            <td>${mck.ownerName}</td>
+                            <td>${mck.mockName}</td>
                             <th>
-                                <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <form method="post" action="/modificar-estudiante">
-                                                <div class="modal-header text-center">
-                                                    <h4 class="modal-title w-100 font-weight-bold">Edit - STUDENT</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body mx-3">
-                                                    <div class="form-group">
-                                                        <label for="mat">ID</label>
-                                                        <input name="id" type="text" class="form-control" id="id" value="${estu.id}" readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="mat">Matricula</label>
-                                                        <input name="matricula" type="text" class="form-control" id="mat">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="nombre">Nombre</label>
-                                                        <input name="nombre" type="text" class="form-control" id="nombre">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="apellido">Apellido</label>
-                                                        <input name="apellido" type="text" class="form-control" id="apellido">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="telefono">Teléfono</label>
-                                                        <input name="telefono" type="text" class="form-control" id="telefono">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer d-flex justify-content-center">
-                                                    <button type="submit" class="btn btn-default">Edit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button id-stu="${estu.id}" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">Edit</button>
-                                </div>
+                                <form method="post" action="/api/getMock/${mck.idMock}">
+                                    <button type="submit" class="btn btn-primary">Ver</button>
+                                </form>
                             </th>
                             <th>
-                                <form method="post" action="/delete-estudiante/${estu.id}">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                <form method="post" action="/deleteMyMock/${mck.idMock}">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                             </th>
                             </th>
