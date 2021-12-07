@@ -20,20 +20,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Crear Mock<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">${crearmock}<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/mymocks">Mis Mocks</a>
+                <a class="nav-link" href="/mymocks">${mismocks}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/allmockys">Todos los Mocks</a>
+                <a class="nav-link" href="/allmockys">${todoslosmocks}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/allusers">Usuarios</a>
+                <a class="nav-link" href="/allusers">${usuarioss}</a>
             </li>
             <form action = "/logout" method="post">
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-dark">Cerrar Sesión</button>
+                    <button type="submit" class="btn btn-dark">${cerrarsesion}</button>
                 </div>
             </form>
         </ul>
@@ -42,7 +42,7 @@
 <br>
 <br>
 <div>
-    <h1>Todos los Mocks</h1>
+    <h1>${todoslosmocks}</h1>
 </div>
 <div class="container-fluid">
     <div class="shadow-sm p3 mb-5 bg-white rounded">
@@ -51,8 +51,8 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">${usuario}</th>
+                    <th scope="col">${nombre}</th>
                     <th scope="col">   </th>
                 </tr>
                 </thead>
@@ -65,12 +65,12 @@
                             <td>${mck.mockName}</td>
                             <th>
                                 <form method="post" action="/api/getMock/${mck.idMock}">
-                                    <button type="submit" class="btn btn-primary">Ver</button>
+                                    <button type="submit" class="btn btn-primary">${ver}</button>
                                 </form>
                             </th>
                             <th>
                                 <form method="post" action="/deleteMock/${mck.idMock}">
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger">${eliminar}</button>
                                 </form>
                             </th>
                             </th>

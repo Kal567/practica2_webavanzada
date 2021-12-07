@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @SpringBootApplication() //scanBasePackages = {"edu.pucmm.otro", "edu.pucmm.pwa"}
 public class DemoSpringBootApplication {
@@ -28,5 +30,16 @@ public class DemoSpringBootApplication {
 
 		SeguridadServices seguridadServices = (SeguridadServices) applicationContext.getBean("seguridadServices");
 		seguridadServices.crearUsuarioAdmin();
+
+		String language = "en";
+		String country = "US";
+
+		if (args.length == 2) {
+			language = args[0];
+			country = args[1];
+		}
+
+		var locale = new Locale(language, country);
+		var messages = ResourceBundle.getBundle("messages", locale);
 	}
 }

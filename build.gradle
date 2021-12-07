@@ -53,4 +53,6 @@ dependencies {
 
     //Prueba.
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    implementation group: 'com.ibm.icu', name: 'icu4j', version: '70.1'
 }

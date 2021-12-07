@@ -20,20 +20,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Crear Mock<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">${crearmock}<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/mymocks">Mis Mocks</a>
+                <a class="nav-link" href="/mymocks">${mismocks}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/allmockys">Todos los Mocks</a>
+                <a class="nav-link" href="/allmockys">${todoslosmocks}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/allusers">Usuarios</a>
+                <a class="nav-link" href="/allusers">${usuarioss}</a>
             </li>
             <form action = "/logout" method="post">
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-dark">Cerrar Sesión</button>
+                    <button type="submit" class="btn btn-dark">${cerrarsesion}</button>
                 </div>
             </form>
         </ul>
@@ -42,7 +42,7 @@
 <br>
 <br>
 <div>
-    <h1>Usuarios</h1>
+    <h1>${usuarioss}</h1>
 </div>
 <div class="container-fluid">
     <div class="shadow-sm p3 mb-5 bg-white rounded">
@@ -50,8 +50,8 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Roles</th>
+                    <th scope="col">${username}</th>
+                    <th scope="col">${roless}</th>
                     <th scope="col">   </th>
                 </tr>
                 </thead>
@@ -70,35 +70,35 @@
                                         <div class="modal-content">
                                             <form method="post" action="/edituser">
                                                 <div class="modal-header text-center">
-                                                    <h4 class="modal-title w-100 font-weight-bold">Editar Usuario</h4>
+                                                    <h4 class="modal-title w-100 font-weight-bold">${editarusuario}</h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body mx-3">
                                                     <div class="form-group">
-                                                        <label for="mat">Username</label>
+                                                        <label for="mat">${username}</label>
                                                         <input name="username" type="text" class="form-control" id="id" value="${usr.username}" readonly>
                                                     </div>
                                                     <div class="form-group">
                                                         <input  type="checkbox" id="admin" name="admin" unchecked>
-                                                        <label for="admin">Hacer admin</label>
+                                                        <label for="admin">${haceradmin}</label>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-center">
-                                                    <button type="submit" class="btn btn-default">Editar</button>
+                                                    <button type="submit" class="btn btn-default">${editar}</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button id-stu="${usr.username}" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">Editar</button>
+                                    <button id-stu="${usr.username}" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">${editar}</button>
                                 </div>
                             </th>
                             <th>
                                 <form method="post" action="/deleteUser/${usr.username}">
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger">${eliminar}</button>
                                 </form>
                             </th>
                             </th>

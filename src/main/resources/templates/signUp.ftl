@@ -13,7 +13,7 @@
 
 
 <div class = "text-center">
-    <h1>Sign Up
+    <h1>Inscribirse
     </h1>
 </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <br>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary" >Sign Up</button>
+                    <button type="submit" class="btn btn-primary" >Inscribirse</button>
                 </div>
 
 

@@ -7,6 +7,7 @@ import edu.pucmm.pwa.repositorio.seguridad.MockRepo;
 import edu.pucmm.pwa.repositorio.seguridad.RolRepository;
 import edu.pucmm.pwa.repositorio.seguridad.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     MockRepo mockRepo;
 
+    @Autowired
+    private MessageSource messageSource;
+
     //Para encriptar la información.
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -42,7 +46,11 @@ public class UserController {
     }
 
     @PostMapping("/newuser")
-    public String newUser(@RequestParam("name") String name, @RequestParam("username") String username, @RequestParam("password") String password){
+    public String newUser(@RequestParam("name") String name,
+                          @RequestParam("username") String username,
+                          @RequestParam("password") String password,
+                          Locale locale,
+                          Model model){
         Rol role = rolRepository.findByRole("ROLE_USER");
 
         Usuario user = new Usuario();
@@ -55,13 +63,30 @@ public class UserController {
 
         //SeguridadServices seguridadServices = (SeguridadServices) applicationContext.getBean("seguridadServices");
         //seguridadServices.savenewUser(name, username, password);
+        model.addAttribute("usuario", messageSource.getMessage("usuario", null, locale));
+        model.addAttribute("contrasena", messageSource.getMessage("contrasena", null, locale));
+        model.addAttribute("iniciarsesion", messageSource.getMessage("iniciarsesion", null, locale));
+        model.addAttribute("crearnuevousuario", messageSource.getMessage("crearnuevousuario", null, locale));
+
+
         return "login";
     }
 
     @GetMapping("/mymocks")
-    public String mymockups(@CookieValue("user") String username, Model model){
+    public String mymockups(@CookieValue("user") String username, Model model, Locale locale){
         //Usuario user = usuarioRepository.findByUsername(username);
         model.addAttribute("mocks", mockRepo.findAllByOwnerName(username));
+
+        model.addAttribute("crearmock", messageSource.getMessage("crearmock", null, locale));
+        model.addAttribute("mismocks", messageSource.getMessage("mismocks", null, locale));
+        model.addAttribute("todoslosmocks", messageSource.getMessage("todoslosmocks", null, locale));
+        model.addAttribute("usuarioss", messageSource.getMessage("usuarioss", null, locale));
+        model.addAttribute("cerrarsesion", messageSource.getMessage("cerrarsesion", null, locale));
+        model.addAttribute("usuario", messageSource.getMessage("usuario", null, locale));
+        model.addAttribute("nombre", messageSource.getMessage("nombre", null, locale));
+        model.addAttribute("ver", messageSource.getMessage("ver", null, locale));
+        model.addAttribute("eliminar", messageSource.getMessage("eliminar", null, locale));
+
         return "myMockups";
     }
 
@@ -81,7 +106,9 @@ public class UserController {
 
     @PostMapping("/edituser")
     public String edituser(@RequestParam("username") String username,
-                           @RequestParam(value = "admin", required = false) boolean admin){
+                           @RequestParam(value = "admin", required = false) boolean admin,
+                           Model model,
+                           Locale locale){
         Usuario user = usuarioRepository.findByUsername(username);
         Rol adminRol = rolRepository.findByRole("ROLE_ADMIN");
         Rol userRol = rolRepository.findByRole("ROLE_USER");
@@ -99,7 +126,8 @@ public class UserController {
         if (!admin && isadminalready){
             user.setRoles(new HashSet<>(Arrays.asList(userRol)));
         }
-        return "userForm";
+
+        return "redirect:/allusers";
     }
 
     @PostMapping("/deleteUser/{username}")
@@ -109,10 +137,10 @@ public class UserController {
         return "redirect:/allusers";
     }
 
-    @GetMapping("/adminform")
+    /*@GetMapping("/adminform")
     public String adminform(){
         return "adminForm";
-    }
+    }*/
 
     /*@GetMapping("/logout")
     public String logout(@CookieValue("user") String username,
@@ -125,15 +153,26 @@ public class UserController {
 
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/allmockys")
-    public String allmockys(Model model){
+    public String allmockys(Model model, Locale locale){
         //Usuario user = usuarioRepository.findByUsername(username);
         model.addAttribute("mocks", mockRepo.findAll());
+
+        model.addAttribute("crearmock", messageSource.getMessage("crearmock", null, locale));
+        model.addAttribute("mismocks", messageSource.getMessage("mismocks", null, locale));
+        model.addAttribute("todoslosmocks", messageSource.getMessage("todoslosmocks", null, locale));
+        model.addAttribute("usuarioss", messageSource.getMessage("usuarioss", null, locale));
+        model.addAttribute("cerrarsesion", messageSource.getMessage("cerrarsesion", null, locale));
+        model.addAttribute("usuario", messageSource.getMessage("usuario", null, locale));
+        model.addAttribute("nombre", messageSource.getMessage("nombre", null, locale));
+        model.addAttribute("ver", messageSource.getMessage("ver", null, locale));
+        model.addAttribute("eliminar", messageSource.getMessage("eliminar", null, locale));
+
         return "adminForm"; //para ver todos los mocks
     }
 
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/allusers")
-    public String allusers(@CookieValue("user") String username, Model model){
+    public String allusers(@CookieValue("user") String username, Model model, Locale locale){
         //Usuario user = usuarioRepository.findByUsername(username);
         List<Usuario> usuarios = usuarioRepository.findAll();
         List<String> roles = new ArrayList<String>();
@@ -147,6 +186,20 @@ public class UserController {
         }
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("roles", roles);
+
+        model.addAttribute("crearmock", messageSource.getMessage("crearmock", null, locale));
+        model.addAttribute("mismocks", messageSource.getMessage("mismocks", null, locale));
+        model.addAttribute("todoslosmocks", messageSource.getMessage("todoslosmocks", null, locale));
+        model.addAttribute("usuarioss", messageSource.getMessage("usuarioss", null, locale));
+        model.addAttribute("cerrarsesion", messageSource.getMessage("cerrarsesion", null, locale));
+        model.addAttribute("username", messageSource.getMessage("username", null, locale));
+        model.addAttribute("roless", messageSource.getMessage("roless", null, locale));
+        model.addAttribute("editarusuario", messageSource.getMessage("editarusuario", null, locale));
+        model.addAttribute("haceradmin", messageSource.getMessage("haceradmin", null, locale));
+        model.addAttribute("editar", messageSource.getMessage("editar", null, locale));
+        model.addAttribute("eliminar", messageSource.getMessage("eliminar", null, locale));
+
+
         return "userForm"; //para ver todos los usuarios
     }
 }

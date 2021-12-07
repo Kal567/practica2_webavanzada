@@ -60,7 +60,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="key">
-                            Key
+                            Header Key
                         </label>
                         <input name="key" type="text" class="form-control" id="key" placeholder="">
                     </div>
@@ -206,7 +206,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="contentType">
-                            Content Type
+                            Tipo de Contenido
                         </label>
                         <select name="contentType" class="form-control" id="contentType" >
                             <option>

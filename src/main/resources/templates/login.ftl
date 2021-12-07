@@ -13,7 +13,7 @@
 
 
 <div class = "text-center">
-    <h1>Iniciar Sesion
+    <h1>${iniciarsesion}
     </h1>
 </div>
 
@@ -23,19 +23,19 @@
         <div class="border" style="padding: 20px">
             <form action = "/login" method="post">
                 <div class="form-group">
-                    <label for="usuario">Usuario</label>
+                    <label for="usuario">${usuario}</label>
                     <input type="text"  class="form-control" name="username" id="nombre"  placeholder="Ingresar usuario">
                 </div>
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
+                    <label for="password">${contrasena}</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Ingresar Contraseña">
                 </div>
                 <br>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary" >Login</button>
+                    <button type="submit" class="btn btn-primary" >${iniciarsesion}</button>
                 </div>
             </form>
-            <a align="justify" href="/signup">Create new user</a>
+            <a align="justify" href="/signup">${crearnuevousuario}</a>
         </div>
 
     </div>
